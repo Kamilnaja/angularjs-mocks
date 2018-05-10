@@ -5,10 +5,11 @@ var app = angular.module('app', [
 ]);
 
 app.component('secondComponent', {
-    controller: function ($scope, contactService) {
+    controller: function ($scope, Contact) {
 
         $scope.deleteItem = function () {
-            $scope.contactsData.delete()
+            $scope.contactsData = Contact;
+            $scope.contactsData.remove({ id: 2 })
                 .$promise
                 .then(updateContactList)
         }
@@ -18,8 +19,7 @@ app.component('secondComponent', {
         }
 
         $scope.loadContactList = function () {
-            $scope.contactsData = contactService.getData;
-            $scope.contacts = $scope.contactsData.query();
+            $scope.contactsData = Contact.query();
         }
 
     },
@@ -28,7 +28,7 @@ app.component('secondComponent', {
         <h2>Second component</h2>
         <button ng-click="loadContactList()">Get items </button>
         <div>
-            <ul ng-repeat="contact in contacts">
+            <ul ng-repeat="contact in contactsData">
                 <li>{{contact.id}} | {{contact.name}} | {{contact.phone}}</li>
             </ul>
         </div>

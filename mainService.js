@@ -1,17 +1,13 @@
-// @ts-check
-app.service('contactService', function ($resource) {
-    var service = {
-
-        get getData() {
-            return $resource('/contacts')
+app.factory("Contact", ["$resource", function ($resource) {
+    return $resource(
+        "/contacts/:id",
+        {
+            id: "@id"
         },
-
-        delete() {
-            return Contact.remove({ id: 3 });
-
-        },
-
-
-    }
-    return service
-})
+        {
+            "update": {
+                method: "PUT"
+            }
+        }
+    );
+}]);
