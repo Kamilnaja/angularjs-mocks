@@ -1,14 +1,10 @@
-app.service('mainService', function ($http) {
+app.service('ServiceWithMethods', function ($resource) {
     var service = {
-        get data() {
-            return $http.get('/details')
+        get getData() {
+            return $resource('/contacts')
         }
     }
-    return service;
+    return service
 })
 
-app.service('Contact', function ($resource) {
-    return $resource(
-        '/contacts'
-    )
-})
+

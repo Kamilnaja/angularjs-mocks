@@ -3,17 +3,17 @@ var app = angular.module('app', [
     'ngMockE2E'
 ]);
 
-app.component('firstComponent', {
-    controller: function ($scope, Contact) {
-        $scope.contacts = Contact.query();
+app.component('secondComponent', {
+    controller: function ($scope, ServiceWithMethods) {
+        $scope.contactsData = ServiceWithMethods.getData;
+        $scope.contacts = $scope.contactsData.query();
     },
-
-    template: `<div>{{contacts}}</div>`
-})
-
-app.component('main', {
-    controller: function ($scope, mainService) {
-
-    },
-    template: `<div>{{hello}}</div>`
+    template:
+        `
+        <h2>Second component</h2>
+        <div>
+            <ul ng-repeat="contact in contacts">
+                <li>{{contact.id}} | {{contact.name}} | {{contact.phone}}</li>
+            </ul>
+        </div>`
 })
